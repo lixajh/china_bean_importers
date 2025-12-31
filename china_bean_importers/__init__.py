@@ -12,6 +12,7 @@ from china_bean_importers import (
     hsbc_hk,
     thu_ecard_old,
     wechat,
+    alipay_cashbook,
 )
 
 __all__ = [
@@ -28,4 +29,5 @@ __all__ = [
     "hsbc_hk",
     "thu_ecard_old",
     "wechat",
+    "alipay_cashbook",
 ]
