@@ -7,6 +7,7 @@ from china_bean_importers import (
     cmb_debit_card,
     cmbc_credit_card,
     cmbc_debit_card,
+    abc_credit_card,
     icbc_credit_card,
     icbc_debit_card,
     hsbc_hk,
