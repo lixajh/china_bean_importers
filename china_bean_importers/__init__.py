@@ -14,6 +14,7 @@ from china_bean_importers import (
     thu_ecard_old,
     wechat,
     alipay_cashbook,
+    boc_debit_card_xlsx,
 )
 
 __all__ = [
@@ -31,4 +32,5 @@ __all__ = [
     "thu_ecard_old",
     "wechat",
     "alipay_cashbook",
+    "boc_debit_card_xlsx",
 ]
