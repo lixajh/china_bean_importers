@@ -86,6 +86,14 @@ class Importer(CsvOrXlsxImporter):
         except Exception:
             return None
 
+        # check blacklist
+        if in_blacklist(self.config, narration):
+            print(
+                f"Item in blacklist: {date} {narration} [{units1}] (Skipped)",
+                file=sys.stderr,
+            )
+            return None
+
         metadata = data.new_metadata(file.name, lineno)
         if row.get('余额') and str(row.get('余额')) != 'nan':
             metadata["balance"] = str(row.get('余额'))
