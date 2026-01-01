@@ -98,7 +98,7 @@ class Importer(CsvOrXlsxImporter):
         if row.get('余额') and str(row.get('余额')) != 'nan':
             metadata["balance"] = str(row.get('余额'))
         
-        tags = set()
+        tags = {"PendingReview"}
         account2 = None
         if m := match_destination_and_metadata(self.config, narration, payee):
             (account2, new_meta, new_tags) = m

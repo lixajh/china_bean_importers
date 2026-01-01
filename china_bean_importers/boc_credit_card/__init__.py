@@ -274,7 +274,7 @@ class Importer(importer.ImporterProtocol):
                 payee = None
 
             metadata = data.new_metadata(file.name, lineno)
-            tags = set()
+            tags = {"PendingReview"}
 
             if card_number == "":
                 my_warn(f"Empty card number", lineno, entry)

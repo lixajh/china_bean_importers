@@ -49,7 +49,7 @@ def gen_txn(config, file, parts, lineno, flag, card_acc):
     if parts[10] != "":
         metadata["payee_branch"] = parts[10]
 
-    tags = set()
+    tags = {"PendingReview"}
 
     if m := match_destination_and_metadata(config, narration, payee):
         (account2, new_meta, new_tags) = m

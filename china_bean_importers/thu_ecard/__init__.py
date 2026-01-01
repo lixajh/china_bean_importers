@@ -56,7 +56,7 @@ class Importer(CsvImporter):
 
             # parse data line
             metadata: dict = data.new_metadata(file.name, lineno)
-            tags = set()
+            tags = {"PendingReview"}
 
             # parse some basic info
             summary = row[0]

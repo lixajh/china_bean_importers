@@ -175,7 +175,7 @@ class Importer(importer.ImporterProtocol):
 
         payee = txn_object.get(C_MERCHANT) or "Unknown"
         narration = txn_object.get(C_TYPE) or None
-        tags = set()
+        tags = {"PendingReview"}
 
         if "退款" in narration:
             tags.add("refund")

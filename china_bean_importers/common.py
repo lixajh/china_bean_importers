@@ -111,7 +111,7 @@ def match_destination_and_metadata(config, desc, payee):
     mapping = None
     priority = 0
     metadata = {}
-    tags = set()
+    tags = {"PendingReview"}
 
     # merge all possible results
     for m in config["detail_mappings"]:

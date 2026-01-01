@@ -116,7 +116,7 @@ class Importer(importer.ImporterProtocol):
                     continue
 
                 metadata = data.new_metadata(file.name, lineno)
-                tags = set()
+                tags = {"PendingReview"}
                 
                 # 账户识别
                 if not card_tail:

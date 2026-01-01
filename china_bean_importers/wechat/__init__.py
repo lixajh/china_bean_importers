@@ -34,7 +34,7 @@ class Importer(CsvOrXlsxImporter):
             elif begin:
                 # parse data line
                 metadata: dict = data.new_metadata(file.name, lineno)
-                tags = set()
+                tags = {"PendingReview"}
 
                 # parse some basic info
                 time = parse(row[0])

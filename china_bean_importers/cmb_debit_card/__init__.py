@@ -34,7 +34,7 @@ def gen_txn(config, file, parts, lineno, flag, card_acc, real_name):
 
     metadata = data.new_metadata(file.name, lineno)
     metadata["balance"] = str(balance)
-    tags = set()
+    tags = {"PendingReview"}
 
     payee_account = None
     if m := PAYEE_RE.match(payee):

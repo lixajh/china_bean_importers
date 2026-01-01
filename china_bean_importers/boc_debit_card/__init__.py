@@ -56,7 +56,7 @@ def gen_txn(config, file, parts, lineno, flag, card_acc, real_name):
     if "------" not in parts[11]:
         metadata["payee_branch"] = parts[11]
 
-    tags = set()
+    tags = {"PendingReview"}
 
     if m := match_destination_and_metadata(config, narration, payee):
         (account2, new_meta, new_tags) = m
