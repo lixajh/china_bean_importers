@@ -23,6 +23,8 @@ def gen_txn(config, file, parts, lineno, flag, card_acc):
     else:
         payee, payee_account = parts[9], ""
     narration = parts[3]
+    if not parts[2].startswith("20"):
+        return None
     full_time = parse(parts[2])
     date = full_time.date()
     units1 = amount.Amount(D(parts[4]), "CNY")
