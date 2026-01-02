@@ -176,7 +176,7 @@ class Importer(CsvOrXlsxImporter):
 
                 # 9. find by narration and payee
                 new_account, new_meta, new_tags = match_destination_and_metadata(
-                    self.config, narration, payee
+                    self.config, narration, payee, expense=expense
                 )
                 if account2 is None:
                     account2 = new_account

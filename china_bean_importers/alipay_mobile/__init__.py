@@ -141,7 +141,7 @@ class Importer(CsvImporter):
                         account2 = source_config["douyin_monthly_payment_account"]
                 else:
                     new_account, new_meta, new_tags = match_destination_and_metadata(
-                        self.config, narration, payee
+                        self.config, narration, payee, expense=expense
                     )
                     if new_account:
                         account2 = new_account

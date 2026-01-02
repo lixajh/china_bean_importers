@@ -74,7 +74,7 @@ class Importer(CsvImporter):
                 
                 # 匹配目标账户
                 account2, new_meta, new_tags = match_destination_and_metadata(
-                    self.config, narration, ""
+                    self.config, narration, "", expense=expense
                 )
                 
                 # 如果没匹配到，根据分类映射

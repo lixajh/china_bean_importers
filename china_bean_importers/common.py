@@ -45,9 +45,17 @@ class BillDetailMapping(typing.NamedTuple):
         return self.destination_account, metadata, tags, self.priority
 
     def match(
-        self, desc: str, payee: str
+        self, desc: str, payee: str, expense: typing.Optional[bool] = None
     ) -> tuple[typing.Optional[str], dict[str, object], set[str], int]:
         assert self.match_logic == "OR" or self.match_logic == "AND"
+
+        # Check target_type if specified in metadata
+        if expense is not None and self.additional_metadata:
+            target_type = self.additional_metadata.get("target_type")
+            if target_type == "expense" and not expense:
+                return None, {}, set(), 0
+            if target_type == "income" and expense:
+                return None, {}, set(), 0
 
         # match narration first
         narration_match = False
@@ -106,7 +114,7 @@ def find_account_by_card_number(config, card_number):
     return None
 
 
-def match_destination_and_metadata(config, desc, payee):
+def match_destination_and_metadata(config, desc, payee, expense=None):
     account = None
     mapping = None
     priority = 0
@@ -116,7 +124,7 @@ def match_destination_and_metadata(config, desc, payee):
     # merge all possible results
     for m in config["detail_mappings"]:
         _mapping: BillDetailMapping = m
-        new_account, new_metadata, new_tags, new_priority = _mapping.match(desc, payee)
+        new_account, new_metadata, new_tags, new_priority = _mapping.match(desc, payee, expense=expense)
         # check compatibility
         if account is None or new_priority > priority:
             account, mapping, priority = new_account, m, new_priority
