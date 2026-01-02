@@ -66,7 +66,7 @@ class Importer(CsvImporter):
                 elif "中国农业银行" in method or "农行" in method:
                     account1 = "Liabilities:CreditCard:ABC:8113"
                 elif "招商银行" in method:
-                    account1 = "Assets:Banking:CMB:1234"
+                    account1 = "Assets:Banking:CMB:2889"
                 elif "余额" in method:
                     account1 = "Assets:Digital:Alipay"
                 elif "民生银行" in method:

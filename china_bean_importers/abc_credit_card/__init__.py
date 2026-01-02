@@ -139,7 +139,7 @@ class Importer(importer.ImporterProtocol):
                 # 特殊处理还款
                 if "还款" in narration or "存款" in narration:
                     # 还款通常是从储蓄卡转入
-                    account2 = "Assets:Banking:CMB:1234" # 默认从主卡还款，用户可后期修改
+                    account2 = "Assets:Banking:CMB:2889" # 默认从主卡还款，用户可后期修改
                     tags.add("repayment")
                 else:
                     account2, new_meta, new_tags = match_destination_and_metadata(
