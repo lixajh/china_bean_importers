@@ -98,12 +98,24 @@ class Importer(CsvOrXlsxImporter):
         if row.get('余额') and str(row.get('余额')) != 'nan':
             metadata["balance"] = str(row.get('余额'))
         
+        # 对方账户账号 (用于识别内部转账)
+        opp_account_raw = str(row.get('对方账户账号', '')).strip()
+        if opp_account_raw and opp_account_raw != 'nan':
+            metadata["payee_account"] = opp_account_raw
+            # 提取后四位尝试匹配内部账户
+            tail_match = re.search(r'(\d{4})$', opp_account_raw)
+            if tail_match:
+                opp_tail = tail_match.group(1)
+                internal_acc = find_account_by_card_number(self.config, opp_tail)
+                if internal_acc:
+                    account2 = internal_acc
+
         tags = {"PendingReview"}
-        account2 = None
-        if m := match_destination_and_metadata(self.config, narration, payee):
-            (account2, new_meta, new_tags) = m
-            metadata.update(new_meta)
-            tags = tags.union(new_tags)
+        if account2 is None:
+            if m := match_destination_and_metadata(self.config, narration, payee, expense=units1.number < 0):
+                (account2, new_meta, new_tags) = m
+                metadata.update(new_meta)
+                tags = tags.union(new_tags)
         
         if account2 is None:
             account2 = unknown_account(self.config, units1.number < 0)

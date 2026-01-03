@@ -104,12 +104,17 @@ def open_pdf(config, name):
 
 
 def find_account_by_card_number(config, card_number):
+    if not card_number:
+        return None
     if isinstance(card_number, int):
         card_number = str(card_number)
+    card_number = card_number.strip()
+    
     for prefix, accounts in config["card_accounts"].items():
         for bank, numbers in accounts.items():
-            if card_number in numbers:
-                return f"{prefix}:{bank}:{card_number}"
+            for tail in numbers:
+                if card_number.endswith(tail):
+                    return f"{prefix}:{bank}:{tail}"
 
     return None
 
