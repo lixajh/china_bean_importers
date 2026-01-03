@@ -98,7 +98,6 @@ class Importer(CsvOrXlsxImporter):
         if row.get('余额') and str(row.get('余额')) != 'nan':
             metadata["balance"] = str(row.get('余额'))
         
-        account2 = None
         # 对方账户账号 (用于识别内部转账)
         opp_account_raw = str(row.get('对方账户账号', '')).strip()
         if opp_account_raw and opp_account_raw != 'nan':
