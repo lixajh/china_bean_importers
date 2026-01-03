@@ -70,7 +70,13 @@ class Importer(CsvImporter):
                 elif "余额" in method:
                     account1 = "Assets:Digital:Alipay"
                 elif "民生银行" in method:
-                    account1 = "Assets:Banking:MSB:6664"
+                    # 区分民生借记卡和信用卡，若 method 包含信用卡字样
+                    if "信用卡" in method:
+                        account1 = "Liabilities:CreditCard:MSB:1933"
+                    else:
+                        account1 = "Assets:Banking:MSB:6664"
+                elif "花呗" in method:
+                    account1 = "Liabilities:CreditCard:Huabei"
                 
                 # 匹配目标账户
                 account2, new_meta, new_tags = match_destination_and_metadata(
