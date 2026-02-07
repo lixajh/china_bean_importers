@@ -61,6 +61,12 @@ class Importer(CsvImporter):
                 metadata["serial"] = serial
                 metadata["status"] = status
 
+                # 跳过已关闭状态的交易，避免导入无效交易
+                # 包括：交易关闭、支付关闭、订单关闭、退款关闭等
+                closed_statuses = ["交易关闭", "支付关闭", "订单关闭", "退款关闭", "已关闭"]
+                if status in closed_statuses or "关闭" in status:
+                    continue
+
                 # fill metadata
                 if payee_account != "":
                     metadata["payee_account"] = payee_account
